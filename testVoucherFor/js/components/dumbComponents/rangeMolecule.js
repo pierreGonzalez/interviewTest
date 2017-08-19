@@ -16,12 +16,18 @@ export default class RangeMolecule extends React.Component {
     this.refs.input.value = 0;
   }
 
-  onChangeInput(){
-    this.setState({
-      ...this.state,
-      amount: this.refs.input.value
+  onChangeInput(e){
+    let amountPromise = new Promise((resolve,reject)=>{
+      this.setState({
+        ...this.state,
+        amount: e.target.value
+      });
+      resolve();
     });
-    this.props.changeSaving(this.state);
+    amountPromise.then(()=>{
+      this.props.changeSaving(this.state);
+    });
+
   }
 
   render () {

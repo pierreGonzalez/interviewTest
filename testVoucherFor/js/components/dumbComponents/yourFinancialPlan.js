@@ -4,28 +4,36 @@ import ExpendituresOrganism from '../smartComponents/expendituresOrganism-contai
 import SpendLessOrganism from '../smartComponents/spendLessOrganism-container';
 
 export default class YourFinacialPlan extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      saving: 0
+    }
+  }
 
   componentDidMount(){
     this.props.initData();
   }
   sumSaving(){
-    let sumExpense=0;
-    let simIncomes=0;
-    let total=0;
-    this.props.incomes.forEach((income)=>{
+    let sumIncomes = this.props.incomes.reduce((sum,income)=>{
+      return (sum +  Number.parseInt(income.amount));
+    },0);
 
-      simIncomes += Number.parseInt(income.amount);
-    });
-    this.props.expendituresForSaving.forEach((expense)=>{
-      sumExpense += Number.parseInt(expense.amount);
-    });
+    let sumExpenses = this.props.expendituresForSaving.reduce((sum,expenditure)=>{
+      return (sum +  Number.parseInt(expenditure.amount));
+    },0);
 
-    total = Number.parseInt((simIncomes/12)-sumExpense);
+    let total = Number.parseInt((sumIncomes/12)-sumExpenses);
+
     return total;
+  }
+  componentWillReceiveProps(){
+      let total = this.sumSaving();
+      this.setState({saving: total});
   }
 
   render () {
-    let savingResult = this.sumSaving();
+    let savingResult = this.state.saving;
     return (
       <div className="col-md-12">
         <div className="col-md-6">
@@ -42,7 +50,7 @@ export default class YourFinacialPlan extends React.Component {
             <div className="panel-heading">SPEND LESS : £ {savingResult}</div>
             <div className="panel-body">
               <p className="spendLessTitle">Try reducing your monthly spending to see how your forecast could improve!</p>
-              <SpendLessOrganism expenditures={this.props.expenditures}/>
+              <SpendLessOrganism expenditures={this.props.expenditures} />
             </div>
           </div>
         </div>

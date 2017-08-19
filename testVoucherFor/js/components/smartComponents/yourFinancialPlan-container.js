@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { initData } from '../../actions/initData-actions';
+import { displaySaving } from '../../actions/changeSaving-actions';
 import YourFinancialPlan from '../dumbComponents/yourFinancialPlan';
 
 const mapStateToProps = (state) => {
@@ -14,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
   return{
     initData: () =>{
       dispatch(initData());
+    },
+    displaySaving:(saving)=>{
+      dispatch(displaySaving(saving));
     }
   }
 };

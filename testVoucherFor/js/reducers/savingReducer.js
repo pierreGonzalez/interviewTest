@@ -24,11 +24,13 @@ const savingState = [
 
 
 const savingReducer = (state = savingState, action) => {
-  const newExpenditures = [...state];
-  const newExpenditure = action.expenditure;
+
 
   switch (action.type){
     case CHANGE_SAVING:{
+      const newExpenditures = [...state];
+      const newExpenditure = action.expenditure;
+      
       const index = findIndex(newExpenditures,{name: newExpenditure.name});
 
       newExpenditures[index] = newExpenditure;

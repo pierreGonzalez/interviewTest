@@ -5,11 +5,11 @@ import _ from 'lodash';
 
 const mapStateToProps = (state,ownProps) => {
     return {
-      name: ownProps.name,
-      from_age: ownProps.from_age,
-      to_age: ownProps.to_age,
-      max: ownProps.amount,
-      amount: ownProps.amount
+      name: ownProps.expenditure.name,
+      from_age: ownProps.expenditure.from_age,
+      to_age: ownProps.expenditure.to_age,
+      max: ownProps.expenditure.amount,
+      amount: ownProps.expenditure.amount
     }
 };
 

@@ -32,7 +32,7 @@ export default class SpendLessOrganism extends React.Component {
 
   render () {
     let saving="£";
-    let rangeMolecule = this.props.expenditures.map(expenditure => <RangeMolecule key={uuid.v4()} amount={expenditure.amount} from_age={expenditure.from_age} to_age={expenditure.to_age}  name={expenditure.name}/>);
+    let rangeMolecule = this.props.expenditures.map(expenditure => <RangeMolecule key={uuid.v4()} expenditure={expenditure}/>);
     let questionArea = this.questionArea();
 
     return (
